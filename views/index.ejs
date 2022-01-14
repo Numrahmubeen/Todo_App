@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Todos</title>
+    <style>
+        th,td,table{
+            border: 1px solid blueviolet;
+        }
+        .center{
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        div{
+            margin: auto;
+            width: 50%;
+            border: 3px solid pink;
+            padding: 10px;
+            text-align: center;
+        }
+        .crossed{
+            text-decoration: line-through;
+        }
+   
+            
+    </style>
+
+</head>
+<body>
+    <div class=".centerPage">
+
+    <form method="GET" action="/addTodo">
+        <button type="submit">Add New Todo</button>
+    </form>
+    <h1 style="text-align: center;">Pending Todos</h1>
+    <table class=".center" >
+        <thead>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Title</th>
+            <th>State</th>
+            <th>Description</th>
+        </thead>
+        <% for(let i = 0; i<mtodos.length; i++){ %>
+            <% if(mtodos[i].todo_state == "P"){%>
+                <tr>
+                    <td> <%= mtodos[i].todo_id  %> </td>
+                    <td> <%= mtodos[i].todo_name  %> </td>
+                   
+                        <td> <%= mtodos[i].todo_title  %> </td>
+                        <td> 
+                            <form method="POST" action="/edit/<%=mtodos[i].todo_id%>">
+                                <input class="form-check-input" name="checked" type="checkbox" value="true" onChange="this.form.submit()">
+                                <input type="hidden" name="state" value="<%= mtodos[i].todo_state %>">
+                            </form>
+                        </td>
+                    <td> <%= mtodos[i].todo_desc  %> </td>
+                </tr>
+            <% } %>  
+        <% } %>  
+
+    </table>
+
+    <h1 style="text-align: center;">Complete Todos</h1>
+    <table class=".center" >
+        <thead>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Title</th>
+            <th>State</th>
+            <th>Description</th>
+        </thead>
+        <% for(let i = 0; i<mtodos.length; i++){ %>
+            <% if(mtodos[i].todo_state == "C"){%>
+                <tr>
+                    <td> <%= mtodos[i].todo_id  %> </td>
+                    <td> <%= mtodos[i].todo_name  %> </td>
+                        <td class="crossed"> <%= mtodos[i].todo_title  %> </td>
+                        <td> 
+                            <form method="POST" action="/edit/<%=mtodos[i].todo_id%>">
+                                <input class="form-check-input" name="checked" type="checkbox" value="true" checked onChange="this.form.submit()">
+                                <input type="hidden" name="state" value="<%= mtodos[i].todo_state %>">
+                            </form>
+                        </td>
+                    <td> <%= mtodos[i].todo_desc  %> </td>
+                </tr>
+            <% } %> 
+        <% } %>  
+
+    </table>
+
+</div>
+    
+</body>
+</html>

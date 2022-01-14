@@ -1,0 +1,12 @@
+create a small todo application, which does as follows:
+Shows users a form, where user can add following fields.
+ - Name
+ - Todo title
+ - Todo description
+Shows 2 lists of todos:
+ - Pending todos - with names, title and description along with a check/uncheck box.
+- Completed todos - with names, title and description along with a check/uncheck box, crossed out title.
+
+
+
+you can use PostgreSql database for storing data
